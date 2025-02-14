@@ -1,0 +1,13 @@
+version: '3'
+services:
+  express-app:
+    build:
+      context: .  
+      dockerfile: Dockerfile
+    image: cpu_cache_web:latest
+    container_name: cpu_cache_web
+    restart: always
+    ports:
+      - "7100:3000" 
+    env_file:
+      - .env                              
