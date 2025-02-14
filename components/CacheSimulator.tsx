@@ -1,12 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Terminal, Cpu } from "lucide-react"
+import { Terminal, Cpu, BookOpen, Code, BarChart } from "lucide-react"
 
 export default function SimulatorPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-slate-200 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] pointer-events-none" />
-      
+
       <div className="relative min-h-screen p-4 md:p-8">
         <div className="max-w-6xl mx-auto space-y-6">
           {/* Header with Glass Effect */}
@@ -15,71 +15,101 @@ export default function SimulatorPage() {
               <Terminal className="w-12 h-12 text-indigo-600" />
               <Cpu className="w-12 h-12 text-purple-600" />
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
-              CPU Cache Simulator
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
+              CS454 CPU Cache Simulator
             </h1>
-            <p className="text-gray-700">Explore and understand cache behavior through interactive simulation</p>
+            <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+              This project was developed by Anen Isaac, Daniel Mawalla, Caroline Joune, and Karim Nyumba in Dr. Hellen
+              Maziku's CS454 class to help future students better understand cache behaviour through interactive
+              simulation.
+            </p>
           </div>
 
-          {/* Instructions Card */}
+          {/* Quick Start Guide */}
           <Card className="bg-white/50 backdrop-blur-sm border border-white/50 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-2xl text-indigo-700">Getting Started</CardTitle>
-              <CardDescription>Follow these steps to use the simulator</CardDescription>
+              <CardTitle className="text-2xl text-indigo-700 flex items-center gap-2">
+                <BookOpen className="w-6 h-6" />
+                Quick Start Guide
+              </CardTitle>
+              <CardDescription>Essential instructions to get you started with the CPU Cache Simulator</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-purple-700 mb-2">Step 1: Launch the Simulator</h3>
-                <div className="bg-slate-800 text-white p-4 rounded-lg font-mono">
-                  <code>python simulator.py 10 7 3 2 LRU WT</code>
+                <h3 className="text-lg font-semibold text-purple-700 mb-2">How to Run the Simulator</h3>
+                <div className="bg-slate-800 text-white p-4 rounded-lg font-mono space-y-2">
+                  <p>
+                    <code>cd cpu-cache-simulator/</code>
+                  </p>
+                  <p>
+                    <code>python simulator.py MEMORY CACHE BLOCK MAPPING REPLACE WRITE</code>
+                  </p>
                 </div>
-                <p className="mt-2 text-gray-700">
-                  This command initializes a simulator with:
-                </p>
+                <p className="mt-2 text-gray-700">Example:</p>
+                <div className="bg-slate-800 text-white p-4 rounded-lg font-mono mt-2 space-y-2">
+                  <p>
+                    <code>cd cpu-cache-simulator/</code>
+                  </p>
+                  <p>
+                    <code>python simulator.py 10 7 3 2 LRU WT</code>
+                  </p>
+                </div>
+                <p className="mt-2 text-gray-700">This creates a simulation with:</p>
                 <ul className="list-disc pl-6 mt-2 text-gray-600 space-y-1">
-                  <li>Memory size: 2^10 bytes (1024 bytes)</li>
-                  <li>Cache size: 2^7 bytes (128 bytes)</li>
-                  <li>Block size: 2^3 bytes (8 bytes)</li>
-                  <li>4-way associative mapping (2^2)</li>
+                  <li>2^10 bytes of memory</li>
+                  <li>2^7 bytes of cache</li>
+                  <li>2^3 bytes per block</li>
+                  <li>2^2-way associative mapping</li>
                   <li>LRU replacement policy</li>
-                  <li>Write-through policy</li>
+                  <li>Write-Through (WT) write policy</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-purple-700 mb-2">Step 2: Available Commands</h3>
+                <h3 className="text-lg font-semibold text-purple-700 mb-2 flex items-center gap-2">
+                  <Code className="w-5 h-5" />
+                  Basic Commands
+                </h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="bg-white/50 p-4 rounded-lg">
-                    <h4 className="font-medium text-indigo-600 mb-2">Basic Operations</h4>
+                    <h4 className="font-medium text-indigo-600 mb-2">Memory Operations</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-center gap-2">
-                        <code className="bg-slate-800 text-white px-2 py-1 rounded">read &lt;address&gt;</code>
+                        <code className="bg-slate-800 text-white px-2 py-1 rounded">read ADDRESS</code>
                         <span className="text-gray-600">Read from memory</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <code className="bg-slate-800 text-white px-2 py-1 rounded">write &lt;address&gt; &lt;byte&gt;</code>
+                        <code className="bg-slate-800 text-white px-2 py-1 rounded">write ADDRESS BYTE</code>
                         <span className="text-gray-600">Write to memory</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <code className="bg-slate-800 text-white px-2 py-1 rounded">stats</code>
-                        <span className="text-gray-600">Show hit/miss statistics</span>
+                        <code className="bg-slate-800 text-white px-2 py-1 rounded">randread AMOUNT</code>
+                        <span className="text-gray-600">Perform random reads</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <code className="bg-slate-800 text-white px-2 py-1 rounded">randwrite AMOUNT</code>
+                        <span className="text-gray-600">Perform random writes</span>
                       </li>
                     </ul>
                   </div>
                   <div className="bg-white/50 p-4 rounded-lg">
-                    <h4 className="font-medium text-indigo-600 mb-2">Advanced Operations</h4>
+                    <h4 className="font-medium text-indigo-600 mb-2">Viewing & Statistics</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-center gap-2">
-                        <code className="bg-slate-800 text-white px-2 py-1 rounded">randread &lt;amount&gt;</code>
-                        <span className="text-gray-600">Random reads</span>
+                        <code className="bg-slate-800 text-white px-2 py-1 rounded">printcache START LENGTH</code>
+                        <span className="text-gray-600">Print cache contents</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <code className="bg-slate-800 text-white px-2 py-1 rounded">printcache &lt;start&gt; &lt;amount&gt;</code>
-                        <span className="text-gray-600">View cache</span>
+                        <code className="bg-slate-800 text-white px-2 py-1 rounded">printmem START LENGTH</code>
+                        <span className="text-gray-600">Print memory contents</span>
                       </li>
                       <li className="flex items-center gap-2">
-                        <code className="bg-slate-800 text-white px-2 py-1 rounded">printmem &lt;start&gt; &lt;amount&gt;</code>
-                        <span className="text-gray-600">View memory</span>
+                        <code className="bg-slate-800 text-white px-2 py-1 rounded">stats</code>
+                        <span className="text-gray-600">View cache statistics</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <code className="bg-slate-800 text-white px-2 py-1 rounded">quit</code>
+                        <span className="text-gray-600">Exit the simulator</span>
                       </li>
                     </ul>
                   </div>
@@ -87,22 +117,34 @@ export default function SimulatorPage() {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-purple-700 mb-2">Example Usage</h3>
+                <h3 className="text-lg font-semibold text-purple-700 mb-2 flex items-center gap-2">
+                  <BarChart className="w-5 h-5" />
+                  Example Session
+                </h3>
                 <div className="bg-slate-800 text-white p-4 rounded-lg space-y-2 font-mono">
                   <p className="flex items-center gap-2">
                     <span className="text-green-400">$</span>
-                    <code>read 0</code>
-                    <span className="text-gray-400"># Read byte at address 0</span>
+                    <code>python simulator.py 10 7 3 2 LRU WT</code>
                   </p>
                   <p className="flex items-center gap-2">
-                    <span className="text-green-400">$</span>
-                    <code>write 4 255</code>
-                    <span className="text-gray-400"># Write value 255 to address 4</span>
+                    <span className="text-green-400">&gt;</span>
+                    <code>read 5</code>
                   </p>
                   <p className="flex items-center gap-2">
-                    <span className="text-green-400">$</span>
-                    <code>printcache 0 4</code>
-                    <span className="text-gray-400"># Show first 4 cache lines</span>
+                    <span className="text-green-400">&gt;</span>
+                    <code>write 5 255</code>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="text-green-400">&gt;</span>
+                    <code>randread 10</code>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="text-green-400">&gt;</span>
+                    <code>stats</code>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="text-green-400">&gt;</span>
+                    <code>quit</code>
                   </p>
                 </div>
               </div>
@@ -117,12 +159,12 @@ export default function SimulatorPage() {
             </CardHeader>
             <CardContent>
               <div className="bg-slate-900 rounded-lg p-1 shadow-inner">
-                <iframe 
-                  src="https://cs454.zawadii.app" 
+                <iframe
+                  src="https://cs454.zawadii.app"
                   className="w-full h-[600px] rounded-lg"
-                  style={{ 
-                    border: '1px solid #1e293b',
-                    borderRadius: '0.5rem'
+                  style={{
+                    border: "1px solid #1e293b",
+                    borderRadius: "0.5rem",
                   }}
                 />
               </div>
@@ -138,3 +180,4 @@ export default function SimulatorPage() {
     </div>
   )
 }
+
