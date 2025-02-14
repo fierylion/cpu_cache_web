@@ -20,7 +20,7 @@ export default function SimulatorPage() {
             </h1>
             <p className="text-sm text-gray-600 max-w-2xl mx-auto">
               This project was developed by Anen Isaac, Daniel Mawalla, Caroline Joune, and Karim Nyumba in Dr. Hellen
-              Maziku's CS454 class to help future students better understand cache behaviour through interactive
+              Maziku&apos;s CS454 class to help future students better understand cache behaviour through interactive
               simulation.
             </p>
           </div>
